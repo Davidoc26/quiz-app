@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Laravel</title>
-    <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet"/>
     <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>
-<body>
+<body class="bg-gray-50">
 @inertia
 </body>
 </html>
