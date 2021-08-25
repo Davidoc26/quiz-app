@@ -11,11 +11,12 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['quiz_id', 'question', 'correct_answer_id'];
+
     public function answers(): HasMany
     {
-        return $this->hasMany(Answer::class);
+        return $this->hasMany(Answer::class)->orderBy('order');
     }
-
 
     public function quiz(): BelongsTo
     {
