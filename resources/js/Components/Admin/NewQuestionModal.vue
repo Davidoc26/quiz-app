@@ -18,7 +18,7 @@
 
 <script>
 import {eventBus} from "@/app";
-import ModalLayout from "./Layouts/ModalLayout";
+import ModalLayout from "@/Components/Admin/Layouts/ModalLayout";
 
 export default {
     name: "NewQuestionModal",
