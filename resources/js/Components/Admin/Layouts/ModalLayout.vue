@@ -10,8 +10,7 @@
                 <slot name="inputs"></slot>
             </div>
             <div class="flex flex-shrink">
-                <button @click="$emit('close')" class="p-4 bg-red-400 rounded-sm w-1/2">Close</button>
-                <slot name="actionButton"></slot>
+                <slot name="buttons"></slot>
             </div>
         </div>
     </div>
