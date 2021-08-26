@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\QuizStoreRequest;
 use App\Http\Requests\UpdateQuizRequest;
 use App\Models\Quiz;
@@ -52,4 +53,5 @@ class QuizController extends Controller
 
         return new JsonResponse(['status' => 'ok', 200]);
     }
+
 }
