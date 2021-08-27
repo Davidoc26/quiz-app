@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AnswerController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [MainController::class, 'index']);
+Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('/quizzes', [MainController::class, 'index']);
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form')->middleware('guest');
+Route::post('/logout', [LoginController::class, 'logout'])->name('login.logout');
+Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
+
+Route::get('/register', [LoginController::class, 'registerForm'])->name('register.form')->middleware('guest');
+Route::post('/register', [LoginController::class, 'register'])->name('register')->middleware('guest');
+
 Route::get('/quizzes/{quiz}', [\App\Http\Controllers\QuizController::class, 'show']);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
