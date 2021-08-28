@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(CompletedQuiz::class);
     }
+
+    public function hasRole(string $roleName): bool
+    {
+        return $this->roles()->get()->pluck('name')->contains($roleName);
+    }
 }

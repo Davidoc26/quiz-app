@@ -23,18 +23,18 @@ Route::get('/', [MainController::class, 'index'])->name('home');
 Route::get('/quizzes', [MainController::class, 'index']);
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form')->middleware('guest');
-Route::post('/logout', [LoginController::class, 'logout'])->name('login.logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('login.logout')->middleware('auth');
 Route::post('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 
 Route::get('/register', [LoginController::class, 'registerForm'])->name('register.form')->middleware('guest');
 Route::post('/register', [LoginController::class, 'register'])->name('register')->middleware('guest');
 
-Route::get('/quizzes/{quiz}', [\App\Http\Controllers\QuizController::class, 'show']);
-Route::post('/quizzes/{quiz}',[\App\Http\Controllers\QuizController::class,'store']);
+Route::get('/quizzes/{quiz}', [\App\Http\Controllers\QuizController::class, 'show'])->middleware('auth');
+Route::post('/quizzes/{quiz}',[\App\Http\Controllers\QuizController::class,'store'])->middleware('auth');
 
 Route::get('/user/{user:name}',[UserController::class,'show']);
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => ['admin']], function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
     Route::group(['prefix' => 'quiz', 'as' => 'quiz.'], function () {
