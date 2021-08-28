@@ -27,12 +27,12 @@
         <div>
             <div class="flex relative h-full" v-if="$page.props.auth.user">
                 <button @click="toggleUserMenu" class="p-4 bg-purple-500 text-white hover:bg-indigo-500 transition">
-                    {{ $inertia.page.props.auth.user.name }}!
+                    {{ $page.props.auth.user.name }}
                 </button>
                 <div v-if="userMenu"
                      v-on-clickaway="toggleUserMenu"
                      class="absolute top-14 right-2 w-10 text-center transform transition flex flex-col gap-1 bg-white rounded-xl shadow-md w-full h-auto">
-                    <button class="p-4 rounded-xl w-full hover:bg-gray-100">Profile</button>
+                    <Link :href="`/user/${$page.props.auth.user.name}`" class="p-4 rounded-xl w-full hover:bg-gray-100">Profile</Link>
                     <button @click="logout" class="p-4 rounded-xl w-full hover:bg-gray-100">Logout</button>
                 </div>
             </div>
@@ -45,10 +45,10 @@
 </template>
 <script>
 import {Link} from '@inertiajs/inertia-vue'
-import { mixin as clickaway } from 'vue-clickaway';
+import {mixin as clickaway} from 'vue-clickaway';
 
 export default {
-    mixins: [ clickaway ],
+    mixins: [clickaway],
     name: "Header",
     components: {
         Link,

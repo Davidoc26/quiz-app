@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,9 @@ Route::get('/register', [LoginController::class, 'registerForm'])->name('registe
 Route::post('/register', [LoginController::class, 'register'])->name('register')->middleware('guest');
 
 Route::get('/quizzes/{quiz}', [\App\Http\Controllers\QuizController::class, 'show']);
+Route::post('/quizzes/{quiz}',[\App\Http\Controllers\QuizController::class,'store']);
+
+Route::get('/user/{user:name}',[UserController::class,'show']);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');

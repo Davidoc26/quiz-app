@@ -44,16 +44,14 @@ export default {
             this.showNextButton = true;
         });
     },
-    mounted() {
-        console.dir(this.quiz.questions);
-    },
     methods: {
         nextQuestion() {
             if (this.currentQuestion === this.questions.length) {
+                axios.post(`/quizzes/${this.quiz.id}`, this.answeredQuestions);
                 this.$modal.show(ResultsModal, {
                     correctAnswers: this.answeredQuestions.correct,
                     incorrectAnswers: this.answeredQuestions.incorrect
-                },{draggable:false, clickToClose: false})
+                }, {draggable: false, clickToClose: false,adaptive:true})
             } else {
                 this.showNextButton = false;
                 this.currentQuestion++;
