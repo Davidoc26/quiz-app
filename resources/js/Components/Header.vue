@@ -31,9 +31,9 @@
                 </button>
                 <div v-if="userMenu"
                      v-on-clickaway="toggleUserMenu"
-                     class="absolute top-14 right-2 w-10 text-center transform transition flex flex-col gap-1 bg-white rounded-xl shadow-md w-full h-auto">
-                    <Link :href="`/user/${$page.props.auth.user.name}`" class="p-4 rounded-xl w-full hover:bg-gray-100">Profile</Link>
-                    <button @click="logout" class="p-4 rounded-xl w-full hover:bg-gray-100">Logout</button>
+                     class="absolute top-12 z-10 right-3 mt-2 py-2 shadow-xl bg-white rounded text-sm ">
+                    <Link :href="`/user/${$page.props.auth.user.name}`" class="block px-6 py-2 hover:bg-indigo-500 hover:text-white">Profile</Link>
+                    <button @click="logout" class="block px-6 py-2 hover:bg-indigo-500 hover:text-white">Logout</button>
                 </div>
             </div>
             <div v-else class="h-full flex">
