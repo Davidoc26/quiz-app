@@ -30,11 +30,11 @@ Route::get('/register', [LoginController::class, 'registerForm'])->name('registe
 Route::post('/register', [LoginController::class, 'register'])->name('register')->middleware('guest');
 
 Route::get('/quizzes/{quiz}', [\App\Http\Controllers\QuizController::class, 'show'])->middleware('auth');
-Route::post('/quizzes/{quiz}',[\App\Http\Controllers\QuizController::class,'store'])->middleware('auth');
+Route::post('/quizzes/{quiz}', [\App\Http\Controllers\QuizController::class, 'store'])->middleware('auth');
 
-Route::get('/user/{user:name}',[UserController::class,'show']);
+Route::get('/user/{user:name}', [UserController::class, 'show']);
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => ['admin']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']], function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
     Route::group(['prefix' => 'quiz', 'as' => 'quiz.'], function () {
@@ -53,6 +53,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware' => ['admin']], 
         Route::post('/', [AnswerController::class, 'store'])->name('store');
         Route::post('/update-order', [AnswerController::class, 'updateOrder'])->name('update.order');
         Route::put('/{answer}/update-text', [AnswerController::class, 'updateText'])->name('update');
+        Route::delete('/{answer}', [AnswerController::class, 'destroy'])->name('destroy');
     });
 });
 

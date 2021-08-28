@@ -36,4 +36,11 @@ class AnswerController extends Controller
 
         return new JsonResponse(['status' => 'ok'], 200);
     }
+
+    public function destroy(Answer $answer): JsonResponse
+    {
+        $answer->delete();
+
+        return new JsonResponse(['status' => 'ok'], 200);
+    }
 }

@@ -15,11 +15,12 @@
                 <div class="flex justify-around handle mb-2 w-full" v-for="(answer) in question.answers"
                      :key="answer.id">
                     <button
-                        class="flex justify-between mx-4 w-full mx-4 py-1 text-base font-semibold text-white transition duration-200 ease-in-out transform bg-yellow-600  rounded-md  outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-yellow-700 ">
+                        class="flex justify-between items-center px-4 w-full mx-4 py-1 text-base font-semibold text-white transition duration-200 ease-in-out transform bg-yellow-600  rounded-md  outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:bg-yellow-700 ">
                         <span>({{ answer.order }})</span>
-                        <input type="text" class=" mr-12 form-control text-black"
+                        <input type="text" class="w-full mx-6 text-black"
                                @keyup.enter="updateAnswerText($event,answer.id,answer.text)"
                                v-model="answer.text"/>
+                        <i class="fas fa-trash-alt" @click="removeAnswer(answer.order)"></i>
                     </button>
                 </div>
             </draggable>
@@ -67,7 +68,43 @@ export default {
                 }
             });
         },
-        updateAnswerText(event,id, text) {
+        removeAnswer(order) {
+
+            if (this.question.answers.length === 1) {
+                return
+            }
+
+            let removedAnswer = this.question.answers.find(answer => {
+                if (answer.order === order) {
+                    return answer;
+                }
+            });
+
+            this.question.answers.splice(order - 1, 1);
+            if (removedAnswer.id === this.real_answer_id && removedAnswer.order !== 1) {
+                this.question.correct_answer_id = 1;
+                let answer = this.question.answers.find((answer) => {
+                    if (answer.order === parseInt(this.question.correct_answer_id)) {
+                        this.real_answer_id = answer.id;
+                        return answer.id;
+                    }
+                });
+                axios.put('/admin/question/' + this.question.id, {
+                    correct_answer_id: answer.id,
+                });
+            } else {
+                this.question.correct_answer_id = 1;
+                this.real_answer_id = this.question.answers[0].id;
+                axios.put('/admin/question/' + this.question.id, {
+                    correct_answer_id: this.question.answers[0].id,
+                });
+            }
+
+            this.updateAnswers();
+
+            axios.delete('/admin/answer/' + removedAnswer.id);
+        },
+        updateAnswerText(event, id, text) {
             axios.put(`/admin/answer/${id}/update-text`, {
                 text
             });
