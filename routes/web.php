@@ -55,6 +55,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['admin']],
         Route::put('/{answer}/update-text', [AnswerController::class, 'updateText'])->name('update');
         Route::delete('/{answer}', [AnswerController::class, 'destroy'])->name('destroy');
     });
+    Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
+        Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('index');
+        Route::get('/{user}/edit', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('edit');
+        Route::put('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('update');
+        Route::put('/{user}/update-roles',[\App\Http\Controllers\Admin\UserController::class,'updateRoles'])->name('update.roles');
+    });
 });
 
 

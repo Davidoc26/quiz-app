@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import MainLayout from '../Layouts/MainLayout';
+import MainLayout from '@/Pages/Layouts/MainLayout';
 import {Link} from '@inertiajs/inertia-vue';
 
 export default {

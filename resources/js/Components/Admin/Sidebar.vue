@@ -8,7 +8,7 @@
                 <span class="text-purple-600 font-bold text-lg">Quizzes</span>
             </Link>
             <Link
-                href="/admin"
+                href="/admin/users"
                 class="flex items-center z-10 justify-center gap-1 bg-yellow-500 py-4 w-full border-transparent border-l-8 hover:border-purple-600 sm:hover:scale-100 hover:translate-x-10 transform transition duration-300">
                 <i class="fas fa-users"></i>
                 <span class="text-purple-600 font-bold text-lg">Users</span>
